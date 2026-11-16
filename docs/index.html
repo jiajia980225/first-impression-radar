@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f8">
+  <meta name="description" content="上传一张照片，看看你给陌生人的第一印象。">
+  <title>初见雷达｜你给陌生人的第一印象</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="masthead wrap">
+    <a class="brand" href="./"><span class="mark" aria-hidden="true"></span>初见雷达</a>
+    <button class="quiet" id="header-example" type="button">示例报告 <span aria-hidden="true">↗</span></button>
+  </header>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="title">
+      <div class="intro">
+        <h1 id="title">你给陌生人的<br><em>第一印象</em>是什么？</h1>
+        <p class="subtitle">一张照片，看看别人第一眼可能记住你的什么。</p>
+        <form id="upload-form">
+          <input type="file" id="photo" accept="image/jpeg,image/png,image/webp" hidden>
+          <div id="upload-zone" class="upload-zone">
+            <button id="pick" type="button" class="button primary">选择照片 <span aria-hidden="true">↑</span></button>
+            <button id="example" type="button" class="button secondary">先看示例</button>
+            <p class="hint" id="file-hint">单人 JPG、PNG 或 WebP · 最大 12 MB</p>
+          </div>
+          <div id="selected" hidden>
+            <div class="selection">
+              <img id="preview" alt="待测评照片">
+              <div><strong id="filename"></strong><button id="change" type="button" class="quiet">更换照片</button></div>
+            </div>
+            <label class="consent"><input type="checkbox" id="consent"> <span>我有权使用这张照片，同意把压缩后的照片发给阿里云百炼进行测评。本站不保存照片或报告。</span></label>
+            <button id="analyze" type="submit" class="button primary">开始测评 <span aria-hidden="true">→</span></button>
+          </div>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <figure class="cover">
+        <button id="cover-example" type="button" class="cover-link" aria-label="查看这张示例照片的报告">
+          <img src="assets/example-portrait.jpg" alt="一位穿红色上衣、微笑看向镜头的人">
+          <span class="cross cross-tl" aria-hidden="true"></span><span class="cross cross-br" aria-hidden="true"></span>
+          <span class="cover-label">示例照片 <span aria-hidden="true">↗</span></span>
+        </button>
+        <figcaption>照片由 <a href="https://unsplash.com/photos/mEZ3PoFGs_k" target="_blank" rel="noopener noreferrer">Michael Dam</a> 拍摄</figcaption>
+      </figure>
+    </section>
+    <section class="report" id="report" aria-labelledby="report-title" hidden>
+      <div class="report-name"><span id="report-kind"></span><button id="again" type="button" class="quiet">换张照片 <span aria-hidden="true">↑</span></button></div>
+      <div class="result-grid">
+        <div class="result-photo"><img id="report-photo" alt="本次报告的照片"></div>
+        <div class="result-top">
+          <h2 id="report-title" tabindex="-1"></h2>
+          <ul id="tags" class="tags" aria-label="印象标签"></ul>
+          <p id="compliment"></p>
+          <p id="summary"></p>
+        </div>
+      </div>
+      <div class="report-block">
+        <h3>五项照片观察</h3>
+        <ol id="dimensions"></ol>
+      </div>
+      <div class="report-block">
+        <h3>下次拍照试试</h3>
+        <ul id="tips"></ul>
+      </div>
+      <div class="report-block share">
+        <div>
+          <h3>问问朋友</h3>
+          <p id="question"></p>
+        </div>
+        <div class="share-actions">
+          <button type="button" id="download" class="button primary">保存分享卡 <span aria-hidden="true">↓</span></button>
+          <label class="include"><input type="checkbox" id="include-photo"> 在分享卡中带上照片</label>
+          <p id="share-status" class="hint" role="status"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer wrap"><strong>初见雷达</strong><p>报告描述照片呈现的印象。换一张照片，印象也可能不同。</p></footer>
+</body>
+</html>

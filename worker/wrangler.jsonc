@@ -1,0 +1,20 @@
+{
+  "name": "first-impression-radar",
+  "main": "index.mjs",
+  "compatibility_date": "2026-11-16",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": false },
+  "vars": {
+    "SITE_ORIGIN": "https://YOUR-GITHUB-USERNAME.github.io",
+    "DASHSCOPE_WORKSPACE_ID": "YOUR-BEIJING-WORKSPACE-ID",
+    "DAILY_LIMIT": "50"
+  },
+  "ratelimits": [
+    { "name": "PHOTO_RATE", "namespace_id": "719203", "simple": { "limit": 3, "period": 60 } }
+  ],
+  "durable_objects": {
+    "bindings": [ { "name": "DAILY_BUDGET", "class_name": "DailyBudget" } ]
+  },
+  "migrations": [ { "tag": "v1", "new_sqlite_classes": [ "DailyBudget" ] } ]
+}
