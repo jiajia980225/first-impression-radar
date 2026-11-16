@@ -9,7 +9,6 @@
   },
   "vars": {
     "SITE_ORIGIN": "https://jiajia980225.github.io",
-    "DASHSCOPE_WORKSPACE_ID": "YOUR-BEIJING-WORKSPACE-ID",
     "DAILY_LIMIT": "50"
   },
   "ratelimits": [
@@ -37,5 +36,8 @@
         "DailyBudget"
       ]
     }
-  ]
+  ],
+  "ai": {
+    "binding": "AI"
+  }
 }

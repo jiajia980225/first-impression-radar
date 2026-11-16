@@ -14,34 +14,17 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory docs
 
 ## 发布
 
-GitHub Pages 提供静态页面。Cloudflare Worker 保存密钥、转发照片并校验模型返回的报告。照片和报告不写入本站的存储。耐久对象只记录按日统计的请求次数，限流绑定服务按来源 IP 限流。
+GitHub Pages 提供静态页面，Cloudflare Worker 通过 AI binding 调用千问 Qwen3.8 27B，校验报告后返回。照片和报告不写入本站存储。
 
-### 1. 开通阿里云百炼
+### 免费调用
 
-登录 [阿里云百炼](https://bailian.console.aliyun.com/)，选择 **华北2（北京）**。在该业务空间创建 API Key，并记下业务空间 ID。在配置文件里只使用业务空间 ID，API Key 通过 Worker 的 Secret 设置。
+当前账户保持 Workers Free。Workers AI 每日有 10,000 Neurons 免费额度，耗尽后拒绝调用，北京时间上午 8 点重置。本站额外限制每日 50 次模型请求，每个来源 IP 每分钟 3 次。每日次数按北京时间零点重置。模型实际可用次数也取决于共享免费额度。
 
-- [API Key 获取方式](https://help.aliyun.com/zh/model-studio/get-api-key)
-- [业务空间专属域名](https://help.aliyun.com/zh/model-studio/regions)
-- [千问 Qwen3.6 Plus](https://help.aliyun.com/zh/model-studio/qwen3-6-plus)
+### 发布测评接口
 
-### 2. 发布测评接口
+在 Cloudflare 免费账户下使用 Wrangler 登录并部署 `worker/wrangler.jsonc`。配置中的 AI binding 提供模型访问，`SITE_ORIGIN` 指定 GitHub Pages 来源。通过同名 Worker 更新部署。
 
-登录 [Cloudflare 控制台](https://dash.cloudflare.com/)，启用 Workers。在 `worker/wrangler.jsonc` 填写：
-
-- `SITE_ORIGIN` 为 `https://你的用户名.github.io`，只填来源域名。
-- `DASHSCOPE_WORKSPACE_ID` 为百炼北京业务空间 ID。
-- `DAILY_LIMIT` 为全站每天允许请求模型的次数，默认 50，北京时间零点重置。每个来源 IP 每分钟初始限 3 次。
-
-使用 Node.js 和 Wrangler 部署，运行如下：
-
-```sh
-cd worker
-npx wrangler login
-npx wrangler deploy
-npx wrangler secret put DASHSCOPE_API_KEY
-```
-
-在最后一条命令的交互提示中粘贴百炼 API Key。也可以在 Cloudflare 的 Worker 设置中添加同名的 Secret。请勿把密钥写进源代码、静态资源、终端命令或聊天。
+[免费额度](https://developers.cloudflare.com/workers-ai/platform/pricing/) · [模型说明](https://developers.cloudflare.com/workers-ai/models/qwen3.8-27b/)
 
 ### 3. 发布 GitHub Pages
 
