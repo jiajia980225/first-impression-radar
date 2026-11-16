@@ -154,13 +154,13 @@ async function analyze(event) {
   }
   const photo = selectedPhoto;
   setBusy(true);
-  announce("正在观察照片里的细节，通常需要几秒到几十秒。");
+  announce("正在观察照片里的细节，首次测评可能需要一到两分钟。");
   try {
     const response = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       cache: "no-store",
-      signal: AbortSignal.timeout(55000),
+      signal: AbortSignal.timeout(120000),
       body: JSON.stringify({ image: photo })
     });
     const payload = await response.json();

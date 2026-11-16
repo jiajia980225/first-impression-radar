@@ -135,7 +135,8 @@ export default {
       if (!capacity.ok) throw new Error("Budget unavailable");
 
       const data = await env.AI.run("@cf/qwen/qwen3.8-27b", {
-        max_completion_tokens: 2600,
+        max_completion_tokens: 1600,
+        chat_template_kwargs: { enable_thinking: false },
         reasoning_effort: "low",
         response_format: { type: "json_object" },
         stream: false,
