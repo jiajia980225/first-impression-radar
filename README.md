@@ -28,7 +28,7 @@ GitHub Pages 提供静态页面，Cloudflare Worker 通过 AI binding 调用千�
 
 ### 3. 发布 GitHub Pages
 
-1. 把 `docs/config.js` 中的 `RADAR_API_URL` 设为 Wrangler 返回的 Worker HTTPS 地址加 `/analyze`。
+1. 把 `docs/app.js` 中的 `API_URL` 设为 Wrangler 返回的 Worker HTTPS 地址加 `/analyze`。
 2. 推送源码到 GitHub 仓库的 `main` 分支。
 3. 在仓库的 **Settings → Pages** 选择 **Deploy from a branch**，分支选 **main**，目录选 **/docs**，保存。
 4. GitHub 给出网址后，打开示例并保存分享卡。再用一张获准使用的单人照片实测，确认拿到标有「AI 分析」的报告。

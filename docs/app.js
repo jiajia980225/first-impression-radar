@@ -1,5 +1,7 @@
 "use strict";
 
+const API_URL = "https://first-impression-radar.realtime-voice-chat-2.workers.dev/analyze";
+
 const el = id => document.getElementById(id);
 const photoInput = el("photo");
 const status = el("status");
@@ -97,7 +99,7 @@ async function select(file) {
     el("filename").textContent = file.name;
     el("selected").hidden = false;
     el("upload-zone").hidden = true;
-    announce(window.RADAR_API_URL ? "" : "在线测评尚未接通。照片仅在本机预览，你可以先查看示例报告。");
+    announce(API_URL ? "" : "在线测评尚未接通。照片仅在本机预览，你可以先查看示例报告。");
     el("change").focus();
     el("upload-form").scrollIntoView({ block: "nearest" });
   } catch (error) {
@@ -142,7 +144,7 @@ function showReport(result, photo, example = false) {
 async function analyze(event) {
   event.preventDefault();
   if (!selectedPhoto || busy) return;
-  const endpoint = window.RADAR_API_URL;
+  const endpoint = API_URL;
   if (!endpoint) {
     announce("在线测评尚未接通，请先查看示例报告。", true);
     return;
